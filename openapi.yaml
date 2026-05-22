@@ -259,7 +259,8 @@ components:
       required: false
       description: Cursor dùng để lấy trang tiếp theo.
       schema:
-        type: [string, 'null']
+        type: string
+        nullable: true
         minLength: 1
         maxLength: 200
     Limit:
@@ -281,7 +282,8 @@ components:
       properties:
         status:
           type: string
-          enum: [ok]
+          enum:
+            - ok
           description: Trạng thái service.
           example: ok
         service:
@@ -322,8 +324,9 @@ components:
           description: Nội dung cảnh báo.
           example: Phát hiện truy cập trái phép tại cổng chính
         relatedEventId:
-          type: [string, 'null']
+          type: string
           format: uuid
+          nullable: true
           description: Event liên quan, có thể null nếu chưa có event id.
           example: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
 
@@ -350,8 +353,9 @@ components:
               description: Thời điểm tạo alert.
               example: '2026-05-10T08:00:00Z'
             resolvedAt:
-              type: [string, 'null']
+              type: string
               format: date-time
+              nullable: true
               description: Thời điểm xử lý xong, null nếu chưa xử lý.
               example: null
 
@@ -373,7 +377,8 @@ components:
           items:
             $ref: '#/components/schemas/Alert'
         nextCursor:
-          type: [string, 'null']
+          type: string
+          nullable: true
           description: Cursor trang tiếp theo, null nếu hết dữ liệu.
           example: null
         hasMore:
@@ -398,7 +403,8 @@ components:
       properties:
         eventType:
           type: string
-          const: SENSOR_READING
+          enum:
+            - SENSOR_READING
           description: Loại event.
           example: SENSOR_READING
         eventId:
@@ -439,7 +445,8 @@ components:
       properties:
         eventType:
           type: string
-          const: ACCESS_CHECK
+          enum:
+            - ACCESS_CHECK
           description: Loại event.
           example: ACCESS_CHECK
         eventId:
