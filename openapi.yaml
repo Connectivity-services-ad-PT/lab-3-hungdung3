@@ -79,18 +79,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Alert'
-              examples:
-                created:
-                  value:
-                    id: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
-                    sourceService: core-business
-                    alertType: UNAUTHORIZED_ACCESS
-                    severity: HIGH
-                    message: Phát hiện truy cập trái phép tại cổng chính
-                    relatedEventId: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
-                    status: OPEN
-                    createdAt: '2026-05-10T08:00:00Z'
-                    resolvedAt: null
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -115,21 +103,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AlertPage'
-              examples:
-                firstPage:
-                  value:
-                    items:
-                      - id: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
-                        sourceService: core-business
-                        alertType: UNAUTHORIZED_ACCESS
-                        severity: HIGH
-                        message: Phát hiện truy cập trái phép tại cổng chính
-                        relatedEventId: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
-                        status: OPEN
-                        createdAt: '2026-05-10T08:00:00Z'
-                        resolvedAt: null
-                    nextCursor: null
-                    hasMore: false
         '401':
           $ref: '#/components/responses/Unauthorized'
         '500':
@@ -515,118 +488,73 @@ components:
         type:
           type: string
           format: uri
-          description: URI định danh loại lỗi.
-          example: https://campus.local/errors/validation
         title:
           type: string
-          minLength: 3
-          maxLength: 120
-          description: Tiêu đề lỗi ngắn gọn.
-          example: Dữ liệu không hợp lệ
         status:
           type: integer
-          minimum: 400
-          maximum: 599
-          description: HTTP status code.
-          example: 400
         detail:
-          type: [string, 'null']
-          maxLength: 500
-          description: Mô tả chi tiết lỗi.
-          example: Field cardId không đúng định dạng
+          type: string
         instance:
-          type: [string, 'null']
+          type: string
           format: uri
-          description: URI của request gây lỗi.
-          example: /alerts
         errors:
           type: array
-          minItems: 0
-          maxItems: 50
           items:
             type: object
-            additionalProperties: false
-            required: [field, code, message]
             properties:
               field:
                 type: string
-                minLength: 1
-                maxLength: 80
-                example: cardId
               code:
                 type: string
-                minLength: 2
-                maxLength: 80
-                example: PATTERN_MISMATCH
               message:
                 type: string
-                minLength: 3
-                maxLength: 200
-                example: cardId phải có dạng RFID-YYYY-NNN
 
   responses:
     BadRequest:
-      description: Dữ liệu sai định dạng
+      description: Bad request
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'
-          example:
-            type: https://campus.local/errors/validation
-            title: Dữ liệu không hợp lệ
-            status: 400
-            detail: Payload không đúng JSON Schema
-            instance: /alerts
-            errors:
-              - field: alertType
-                code: ENUM_MISMATCH
-                message: alertType không nằm trong danh sách cho phép
 
     Unauthorized:
-      description: Thiếu hoặc sai thông tin xác thực
+      description: Unauthorized
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'
-          example:
-            type: https://campus.local/errors/unauthorized
-            title: Chưa xác thực
-            status: 401
-            detail: Thiếu Bearer token
-            instance: /alerts/recent
-            errors: []
 
     Forbidden:
-      description: Không có quyền thực hiện thao tác
+      description: Forbidden
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     NotFound:
-      description: Resource không tồn tại
+      description: Not found
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     Conflict:
-      description: Xung đột nghiệp vụ hoặc trùng idempotency key
+      description: Conflict
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     UnprocessableEntity:
-      description: Payload đúng định dạng nhưng không hợp lệ về nghiệp vụ
+      description: Validation error
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'
 
     InternalServerError:
-      description: Lỗi không mong muốn phía server
+      description: Internal server error
       content:
-        application/problem+json:
+        application/json:
           schema:
             $ref: '#/components/schemas/Problem'

@@ -1,7 +1,9 @@
-# Known Issues — Lab 02
+# Known Issues
 
-Ghi các lỗi còn tồn tại nếu chưa xử lý xong.
+- spectral lint openapi.yaml --ruleset campus-spectral.yaml
+  crashes with:
 
-| Lỗi | Ảnh hưởng | Cách xử lý dự kiến | Người phụ trách |
-|---|---|---|---|
-|  |  |  |  |
+  Cannot read properties of null (reading 'enum')
+
+- Prism mock server still runs successfully.
+- Mock endpoints return HTTP 200 correctly.
