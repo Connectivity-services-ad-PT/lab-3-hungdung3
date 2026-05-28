@@ -1,0 +1,38 @@
+﻿name: Newman Automated Testing
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Install Project Dependencies
+      run: npm install
+
+    - name: Install Prism Mock Server
+      run: npm install -g @stoplight/prism-cli
+
+    - name: Start Prism Mock Server in Background
+      run: |
+        prism mock contracts/team-core.openapi.yaml -p 4010 &
+        sleep 3
+
+    - name: Run Postman Tests with Newman
+      run: |
+        npx newman run postman/collections/FIT4110_lab03_team-core.postman_collection.json \
+          -e postman/environments/FIT4110_lab03_team-core_mock.postman_environment.json \
+          -r cli,junit
+
