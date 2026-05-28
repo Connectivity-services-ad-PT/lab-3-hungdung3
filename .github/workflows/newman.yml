@@ -1,4 +1,4 @@
-﻿name: Newman Automated Testing
+name: Newman Automated Testing
 
 on:
   push:
@@ -35,4 +35,3 @@ jobs:
         npx newman run postman/collections/FIT4110_lab03_team-core.postman_collection.json \
           -e postman/environments/FIT4110_lab03_team-core_mock.postman_environment.json \
           -r cli,junit
-
