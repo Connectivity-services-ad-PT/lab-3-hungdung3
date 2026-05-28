@@ -259,10 +259,11 @@ components:
       required: false
       description: Cursor dùng để lấy trang tiếp theo.
       schema:
-        type: string
-        nullable: true
-        minLength: 1
-        maxLength: 200
+        anyOf:
+          - type: string
+            minLength: 1
+            maxLength: 200
+          - type: 'null'
     Limit:
       name: limit
       in: query
@@ -324,9 +325,10 @@ components:
           description: Nội dung cảnh báo.
           example: Phát hiện truy cập trái phép tại cổng chính
         relatedEventId:
-          type: string
-          format: uuid
-          nullable: true
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
           description: Event liên quan, có thể null nếu chưa có event id.
           example: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
 
@@ -353,9 +355,10 @@ components:
               description: Thời điểm tạo alert.
               example: '2026-05-10T08:00:00Z'
             resolvedAt:
-              type: string
-              format: date-time
-              nullable: true
+              anyOf:
+                - type: string
+                  format: date-time
+                - type: 'null'
               description: Thời điểm xử lý xong, null nếu chưa xử lý.
               example: null
 
@@ -377,8 +380,9 @@ components:
           items:
             $ref: '#/components/schemas/Alert'
         nextCursor:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: 'null'
           description: Cursor trang tiếp theo, null nếu hết dữ liệu.
           example: null
         hasMore:
