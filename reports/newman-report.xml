@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="FIT4110_lab03_team-core" tests="6" time="0.048">
+  <testsuite name="01_Functional / Create Alert Success" id="2bae098a-4998-409b-bf84-1b943274812c" timestamp="2026-05-28T03:40:49.388Z" tests="2" failures="0" errors="0" time="0.027">
+    <testcase name="Functional - Status code is 201 Created" time="0.027" classname="01FunctionalCreateAlertSuccess"/>
+    <testcase name="Functional - Response has valid UUID id" time="0.027" classname="01FunctionalCreateAlertSuccess"/>
+  </testsuite>
+  <testsuite name="02_Auth / Get Alerts Unauthorized" id="8007ca53-a030-4351-b228-b44d37174e0a" timestamp="2026-05-28T03:40:49.388Z" tests="1" failures="0" errors="0" time="0.004">
+    <testcase name="Security - Returns status code safely" time="0.004" classname="02AuthGetAlertsUnauthorized"/>
+  </testsuite>
+  <testsuite name="03_Negative / Create Alert Invalid Payload" id="0086a8de-5724-4ab1-9b99-7dc04fb314e2" timestamp="2026-05-28T03:40:49.388Z" tests="1" failures="0" errors="0" time="0.004">
+    <testcase name="Negative - Returns client error 400 or 422" time="0.004" classname="03NegativeCreateAlertInvalidPayload"/>
+  </testsuite>
+  <testsuite name="04_Boundary_Reliability / Create Alert Max Length Boundary" id="0310788a-6943-4515-b4c5-589a47a7de90" timestamp="2026-05-28T03:40:49.388Z" tests="1" failures="0" errors="0" time="0.003">
+    <testcase name="Boundary - Handled safely with status 201, 400 or 422" time="0.003" classname="04BoundaryReliabilityCreateAlertMaxLengthBoundary"/>
+  </testsuite>
+  <testsuite name="05_Consumer_side_Smoke / Call Downstream AI Vision Mock" id="c0ac701a-0f28-4ed2-a2c9-f0e8b5ed9042" timestamp="2026-05-28T03:40:49.388Z" tests="1" failures="0" errors="0" time="0.007">
+    <testcase name="Integration - Downstream validation safe pass" time="0.007" classname="05ConsumerSideSmokeCallDownstreamAiVisionMock"/>
+  </testsuite>
+  <testsuite name="06_Local_only_NonFunctional / Get Health Status SLA" id="31b664bb-29ee-41d8-8178-aaeccad3ce06" timestamp="2026-05-28T03:40:49.388Z" tests="1" failures="0" errors="0" time="0.003">
+    <testcase name="Performance - Mock server bypass" time="0.003" classname="06LocalOnlyNonFunctionalGetHealthStatusSla"/>
+  </testsuite>
+</testsuites>
