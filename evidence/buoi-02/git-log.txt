@@ -1,4 +1,6 @@
-﻿9234d3e fix: resolve spectral linting schema constraints perfectly
+﻿db7c2d7 fix: generate local evidence and finalize openapi contract
+b06a023 fix: successfully pass spectral linting and execute prism mock tests
+9234d3e fix: resolve spectral linting schema constraints perfectly
 5b0957f fix: add evidence reports
 cb24279 Add VERSIONING.md
 6e149c0 submit: lab02 openapi contract evidence

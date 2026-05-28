@@ -259,11 +259,9 @@ components:
       required: false
       description: Cursor dùng để lấy trang tiếp theo.
       schema:
-        anyOf:
-          - type: string
-            minLength: 1
-            maxLength: 200
-          - type: 'null'
+        type: [string, 'null']
+        minLength: 1
+        maxLength: 200
     Limit:
       name: limit
       in: query
@@ -283,8 +281,7 @@ components:
       properties:
         status:
           type: string
-          enum:
-            - ok
+          enum: [ok]
           description: Trạng thái service.
           example: ok
         service:
@@ -325,10 +322,8 @@ components:
           description: Nội dung cảnh báo.
           example: Phát hiện truy cập trái phép tại cổng chính
         relatedEventId:
-          anyOf:
-            - type: string
-              format: uuid
-            - type: 'null'
+          type: [string, 'null']
+          format: uuid
           description: Event liên quan, có thể null nếu chưa có event id.
           example: 0196fb3d-4ad7-7d1e-9f49-5d5148d2babc
 
@@ -355,10 +350,8 @@ components:
               description: Thời điểm tạo alert.
               example: '2026-05-10T08:00:00Z'
             resolvedAt:
-              anyOf:
-                - type: string
-                  format: date-time
-                - type: 'null'
+              type: [string, 'null']
+              format: date-time
               description: Thời điểm xử lý xong, null nếu chưa xử lý.
               example: null
 
@@ -380,9 +373,7 @@ components:
           items:
             $ref: '#/components/schemas/Alert'
         nextCursor:
-          anyOf:
-            - type: string
-            - type: 'null'
+          type: [string, 'null']
           description: Cursor trang tiếp theo, null nếu hết dữ liệu.
           example: null
         hasMore:
@@ -396,6 +387,9 @@ components:
         - $ref: '#/components/schemas/AccessEvent'
       discriminator:
         propertyName: eventType
+        mapping:
+          SENSOR_READING: '#/components/schemas/SensorEvent'
+          ACCESS_CHECK: '#/components/schemas/AccessEvent'
 
     SensorEvent:
       type: object
@@ -404,8 +398,7 @@ components:
       properties:
         eventType:
           type: string
-          enum:
-            - SENSOR_READING
+          const: SENSOR_READING
           description: Loại event.
           example: SENSOR_READING
         eventId:
@@ -446,8 +439,7 @@ components:
       properties:
         eventType:
           type: string
-          enum:
-            - ACCESS_CHECK
+          const: ACCESS_CHECK
           description: Loại event.
           example: ACCESS_CHECK
         eventId:

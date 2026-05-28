@@ -11,5 +11,8 @@
     "mock": "prism mock openapi.yaml --port 4010",
     "test:mock:curl": "bash scripts/test_mock_with_curl.sh"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "newman": "^6.2.2",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
 }
